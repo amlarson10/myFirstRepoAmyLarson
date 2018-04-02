@@ -3,12 +3,11 @@
  * @author Amy Amy Larson amlarson10@dmacc.edu 2018-02-15 updated 4/2/18 CIS152 This class
  *         creates a queue that uses a linked list
  */
-
 public class ListQueue extends Queue {
 	private LinkedListForQueue myList;
 
 	/**
-	 * Constructor for queue based on linked list. max size is automatically set to 0, indicating no limit.
+	 * Constructor for ListQueue. max size is automatically set to 0, indicating no limit.
 	 * @param queueName
 	 */
 	public ListQueue(String queueName) {
@@ -19,8 +18,9 @@ public class ListQueue extends Queue {
 
 	/**
 	 * adds a new item to the queue, queue is modified
-	 * 
+	 * @see Queue#enqueue(JobListing)
 	 * @param item
+	 * @return
 	 */
 	public boolean enqueue(JobListing item) {
 		myList.insertLast(item);
@@ -29,7 +29,7 @@ public class ListQueue extends Queue {
 
 	/**
 	 * removes and returns an item, queue is modified.
-	 * 
+	 * @see Queue#dequeue()
 	 * @return
 	 */
 	public JobListing dequeue() {
@@ -39,7 +39,7 @@ public class ListQueue extends Queue {
 
 	/**
 	 * returns a boolean and tests for an empty queue, queue is not modified.
-	 * 
+	 * @see Queue#isEmpty()
 	 * @return
 	 */
 	public boolean isEmpty() { // true if queue is empty
@@ -48,7 +48,7 @@ public class ListQueue extends Queue {
 
 	/**
 	 * returns the int size of the queue, queue is not modified
-	 * 
+	 * @see Queue#size()
 	 * @return
 	 */
 	public int size() {
@@ -57,6 +57,7 @@ public class ListQueue extends Queue {
 
 	/**
 	 * prints the queue from front to rear, queue is not modified.
+	 * @see Queue#print()
 	 */
 	public void print() {
 		System.out.println("Display queue front to back:");
@@ -64,8 +65,8 @@ public class ListQueue extends Queue {
 	}
 
 	/**
-	 * Amy added 3/15 gets the front element, queue is not modified.
-	 * 
+	 * gets the front element, queue is not modified.
+	 * @see Queue#peek()
 	 * @return
 	 */
 	public JobListing peek() {
@@ -75,6 +76,7 @@ public class ListQueue extends Queue {
 
 	/**
 	 *Always returns false, linked list never full 
+	 * @see Queue#isFull()
 	 * @return
 	 */
 	public boolean isFull() {
