@@ -6,9 +6,8 @@
  */
 public class LinkedListForQueue {
 	private Link1 first; // ref to first Link1 on the list
-
-
 	private Link1 last; // ref to last item Link1 on the list
+	private int nItems;
 	
 	/**
 	 * constructor
@@ -16,6 +15,7 @@ public class LinkedListForQueue {
 	public LinkedListForQueue() { // constructor
 		first = null; // empty list
 		last = null; // empty list
+		nItems = 0;
 	}
 
 	/**
@@ -55,37 +55,35 @@ public class LinkedListForQueue {
 			first = newLink1;
 		}
 		else {
-		last.next = newLink1;
+			last.next = newLink1;
 		}
 		last = newLink1;
-		}
+		nItems++;	
+	}
+		
 
 /**
  *returns and deletes the first link (would be head of queue
  * @return
  */
 public Link1 deleteFirst() {
+	if (first ==null) {
+		return null;
+	}
 	Link1 temp = first;
 	if (first.next == null){ 
 		last = null;}
 	first = first.next;
+	nItems--;
 	return temp;
 }
 	
 	/**
-	 * counts the number of Link1s in the list
-	 * 
+	 * returns the number of Link1s in the list
 	 * @return
 	 */
 	public int size() {
-		// start at first
-		Link1 current = last;
-		int count = 0;
-		while (current != null) {
-			current = current.next; // go to next item
-			count++;
-		}
-		return count;// gets number of items
+		return nItems;// gets number of items
 	}
 
 	/**

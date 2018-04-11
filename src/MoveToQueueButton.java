@@ -27,12 +27,12 @@ public class MoveToQueueButton extends ConditionalButton {
 	 */
 	public MoveToQueueButton(String onTextPrefix, Color onColor, Queue thisQueue, Queue toQueue) {
 		super();
-		setOnText(onTextPrefix);
-		setOnColor(onColor);
-		toggleBtnEnable();
-		setOffText(null);
 		this.toQueue = toQueue;
 		this.thisQueue = thisQueue;
+		setOnText(onTextPrefix);
+		setOffText();
+		setOnColor(onColor);
+		toggleBtnEnable();
 	}
 
 	/**

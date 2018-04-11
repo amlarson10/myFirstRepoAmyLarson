@@ -12,7 +12,7 @@ public class ConditionalButton extends JButton {
 	private static final long serialVersionUID = 8864534052108560092L; //compiler flagged need for this
 	private String onText;
 	private Color onColor;
-	private String offText;
+	private String offText = null;
 	private final Color OFF_COLOR = UIManager.getColor("Button.disabledForeground"); //same for all buttons of this class
 
 
@@ -33,7 +33,7 @@ public class ConditionalButton extends JButton {
 		super();
 		this.onColor=onColor;
 		setOnText(onText);
-		setOffText(null);
+		setOffText();
 		toggleBtnEnable(startEnabled);
 	}
 
@@ -101,14 +101,10 @@ public class ConditionalButton extends JButton {
 	}
 
 	/**
-	 * sets test that shows when button is disabled
-	 * @param offText 
+	 * sets text that shows when button is disabled
 	 */
-	public void setOffText(String offText) {
-		if (offText == null) {
+	public void setOffText() {
 			this.offText = ("  X"+getOnText());
-		}
-		this.offText = offText;
 	}
 	
 }

@@ -1,8 +1,4 @@
-/**
- * @author Amy Larson amlarson10@dmacc.edu CIS152
- *3-20-18 updated Apr 2, 2018 
- *
- */
+
 
 	import java.awt.BorderLayout;
 	import java.awt.EventQueue;
@@ -29,12 +25,13 @@
 	import java.awt.Dimension;
 	import java.awt.Component;
 	import javax.swing.border.LineBorder;
-	import java.awt.event.FocusAdapter;
-	import java.awt.event.FocusEvent;
 	import javax.swing.event.ChangeListener;
 	import javax.swing.event.ChangeEvent;
 	import java.awt.event.ActionListener;
 	import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 	/**
 	 * This is the main screen of the program
@@ -97,6 +94,7 @@
 			textLocation.setText(null);
 			textAreaNotes.setText(null);
 			setFoundDate();// automatically defaults to today's date
+			updateScreen();
 		}
 
 		/**
@@ -131,6 +129,12 @@
 			updateButtons();
 
 		}
+		private void addSubmit(MoveToQueueButton btn) {
+			JobListing info = saveJobFormFields();
+			boolean saved = btn.addToQueue(info);
+			checkNewSaved(saved);
+			updateScreen();
+		}	
 
 		/**
 		 * Launch the application.
@@ -309,21 +313,19 @@
 			panel.add(separatorAddJob, gbc_separatorAddJob);
 
 			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-
-			//this button will generate data helpful for testing- would remove before release to users
+	
+			//this button will generate data helpful for testing- remove before release to users
 			JButton btnTest = new JButton("Test");
 			btnTest.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-
 					textJobTitle.setText("testJobName" + testCount );
 					textCompany.setText("testCompany" + testCount);
 					textLocation.setText("Des Moines, IA");
 					testCount+=1;
 					if (testCount % 3 == 0) {
-						textAreaNotes.setText("url is www.jobapplication.com. Need to create a custom cover letter.");
+						textAreaNotes.setText("www.hardjobapplication.com. This is a priority. Create a cover letter and customize resume.");
 					} else
-						textAreaNotes.setText(
-								"Existing resume is close, but should emphasize training experience more. No cover letters accepted. Good commute. url is www.jobapplication.com");
+						textAreaNotes.setText("Apply online at www.easyjobapplication.com. No deadline listed.");
 					}
 				});
 			
@@ -343,13 +345,17 @@
 			panel.add(tabbedPane, gbc_tabbedPane);
 
 			btnAddGen = new MoveToQueueButton("Add to ", new Color(0, 128, 0), null, genQueue); // add to
-																											// genQueue
+			btnAddGen.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					addSubmit(btnAddGen);
+				}
+			});
+																							// genQueue
 			btnAddGen.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					// confirms that new queue was saved, if yes will clear form
-					checkNewSaved(btnAddGen.addToQueue(saveJobFormFields()));
-					updateScreen();
+					addSubmit(btnAddGen);
 				}
 			});
 			btnAddGen.setFont(fontButton);
@@ -359,9 +365,13 @@
 			btnAddPri.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					// confirms that new queue was saved, if so will clear form
-					checkNewSaved(btnAddPri.addToQueue(saveJobFormFields()));
-					updateScreen();
+					addSubmit(btnAddPri);
+				}
+			});
+			btnAddPri.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					addSubmit(btnAddPri);
 				}
 			});
 			btnAddPri.setFont(fontButton);
@@ -372,7 +382,12 @@
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					clearAddJobForm();
-					updateScreen();
+				}
+			});
+			btnClearJobForm.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					clearAddJobForm();
 				}
 			});
 			btnClearJobForm.setFont(fontButton);
@@ -384,30 +399,25 @@
 			btnClearJobForm.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					//move to completed queue???
-					clearAddJobForm();
-					updateScreen();
+					addSubmit(btnCompleted);
 				}
 			});
+			btnCompleted.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					addSubmit(btnCompleted);
+				}
+			});
+			
 			toolBar.add(btnCompleted);
 
 			panelManageGen = new GUIManageQueue(genQueue, priQueue, complQueue);
-			panelManageGen.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusGained(FocusEvent arg0) {
-					updateScreen();
-				}
-			});
 			tabbedPane.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
 
 			panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
-			panelManagePri.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusGained(FocusEvent arg0) {
-					updateScreen();
-				}
-			});
 			tabbedPane.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
+			panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, textAreaNotes, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
+			setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
 			tabbedPane.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
 					updateScreen();

@@ -70,7 +70,7 @@ public class ListQueue extends Queue {
 	 * @return
 	 */
 	public JobListing peek() {
-		Link1 temp = myList.getLast();
+		Link1 temp = myList.getFirst();
 		return temp.item;
 	}
 

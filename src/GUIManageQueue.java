@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+
 
 /**
  * Creates a panel for managing the queue through a GUI
@@ -137,6 +140,7 @@ private void setTextStatus() {
 					thisQueue.dequeue();
 				}
 				updatePanel();
+				GUIJobTrackerMain.updateButtons();
 			}
 		});
 		toolBar.add(btnDeleteListing);
@@ -148,6 +152,7 @@ private void setTextStatus() {
 			public void mouseClicked(MouseEvent arg0) {
 				btnMove1.moveToQueue();// take the job that is dequeued from this and add it to another queue.
 				updatePanel();
+				GUIJobTrackerMain.updateButtons();
 			}
 		});
 		toolBar.add(btnMove1);
@@ -159,11 +164,13 @@ private void setTextStatus() {
 			public void mouseClicked(MouseEvent arg0) {
 				btnMove2.moveToQueue();// take the job that is dequeued from this and add it to another queue.
 				updatePanel();
+				GUIJobTrackerMain.updateButtons();
 			}
 		});
 		toolBar.add(btnMove2);
 	
 		textStatus = new JTextField();
+		textStatus.setEditable(false);
 		GridBagConstraints gbc_textStatus = new GridBagConstraints();
 		gbc_textStatus.insets = new Insets(0, 0, 5, 0);
 		gbc_textStatus.fill = GridBagConstraints.HORIZONTAL;
@@ -174,6 +181,7 @@ private void setTextStatus() {
 		setTextStatus();
 		
 		textAreaJobPeek = new JTextArea();
+		textAreaJobPeek.setEditable(false);
 		textAreaJobPeek.setLineWrap(true);
 		textAreaJobPeek.setWrapStyleWord(true);
 		GridBagConstraints gbc_textAreaJobPeek = new GridBagConstraints();
@@ -181,6 +189,7 @@ private void setTextStatus() {
 		gbc_textAreaJobPeek.gridx = 0;
 		gbc_textAreaJobPeek.gridy = 3;
 		add(textAreaJobPeek, gbc_textAreaJobPeek);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnDeleteListing, btnMove1, btnMove2}));
 		setTextAreaJobPeek();
 
 	}

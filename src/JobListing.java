@@ -153,7 +153,7 @@ public class JobListing {
 	}
 
 	/**
-	 *
+	 *setter for completedDate
 	 * @param year
 	 * @param month
 	 * @param day
@@ -170,7 +170,18 @@ public class JobListing {
 	 * @return description string with formatted main information from this JobListing
 	 */
 	public String toString() {
-		String description = (jobTitle + " at " + company + " in " + location + ". \nFound: "+getFoundDate()+ ". \nNotes: "+notes);
+		String description = ""; 
+		if (!jobTitle.equals("")){
+			description = (jobTitle+" ");
+		}
+		if (!company.equals("")){
+			description += ("at " + company+" ");
+			}
+		if (!location.equals("")){
+			description += ("in " + location+" ");
+			}
+		description+= ("\nFound: "+getFoundDate()+ ". \nNotes: "+notes);
+
 		return description;
 	}
 }
