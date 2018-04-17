@@ -21,8 +21,6 @@
 	import java.awt.event.MouseEvent;
 	import java.time.LocalDate;
 	import javax.swing.JTabbedPane;
-	import javax.swing.JSeparator;
-	import java.awt.Dimension;
 	import java.awt.Component;
 	import javax.swing.border.LineBorder;
 	import javax.swing.event.ChangeListener;
@@ -32,6 +30,8 @@
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
 
 	/**
 	 * This is the main screen of the program
@@ -61,6 +61,7 @@ import java.awt.event.KeyEvent;
 		private static MoveToQueueButton btnCompleted;
 		private static MoveToQueueButton btnAddPri;
 		private static MoveToQueueButton btnAddGen;
+		private static JButton btnClearJobForm;
 	
 		/**
 		 * setter for foundDate
@@ -159,7 +160,7 @@ import java.awt.event.KeyEvent;
 		public GUIJobTrackerMain() {
 			setTitle("Job Listing Tracker");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 750, 502);
+			setBounds(100, 100, 750, 735);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			contentPane.setLayout(new BorderLayout(0, 0));
@@ -169,43 +170,60 @@ import java.awt.event.KeyEvent;
 			contentPane.add(panel, BorderLayout.WEST);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[] { 0, 75, 259, 0, 301, 0 };
-			gbl_panel.rowHeights = new int[] { 78, 75, 20, 20, 20, 20, 33, 20, 0, 0, 0, 0, 0 };
-			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0, 0.0 };
-			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			gbl_panel.rowHeights = new int[] { 3, 0, -11, 80, 75, 20, 20, 20, 20, 33, 0, 0, 0, 0, 63, 0 };
+			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, 0.0 };
+			gbl_panel.rowWeights = new double[] { 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
 					Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
+			
+			JFormattedTextField frmtdtxtfldAddAJob = new JFormattedTextField();
+			frmtdtxtfldAddAJob.setText("Add a Job Listing");
+			frmtdtxtfldAddAJob.setHorizontalAlignment(SwingConstants.CENTER);
+			frmtdtxtfldAddAJob.setFont(new Font("Tahoma", Font.BOLD, 15));
+			frmtdtxtfldAddAJob.setEditable(false);
+			frmtdtxtfldAddAJob.setColumns(5);
+			frmtdtxtfldAddAJob.setBackground(Color.WHITE);
+			GridBagConstraints gbc_frmtdtxtfldAddAJob = new GridBagConstraints();
+			gbc_frmtdtxtfldAddAJob.anchor = GridBagConstraints.SOUTH;
+			gbc_frmtdtxtfldAddAJob.gridwidth = 4;
+			gbc_frmtdtxtfldAddAJob.insets = new Insets(0, 0, 5, 5);
+			gbc_frmtdtxtfldAddAJob.fill = GridBagConstraints.HORIZONTAL;
+			gbc_frmtdtxtfldAddAJob.gridx = 1;
+			gbc_frmtdtxtfldAddAJob.gridy = 3;
+			panel.add(frmtdtxtfldAddAJob, gbc_frmtdtxtfldAddAJob);
 
-			JTextArea textArea = new JTextArea();
-			textArea.setRows(3);
-			textArea.setFont(fontText);
-			textArea.setText(
+			JTextArea textAreaInstructions = new JTextArea();
+			textAreaInstructions.setRows(3);
+			textAreaInstructions.setFont(fontText);
+			textAreaInstructions.setText(
 					"Fill in the information about a job listing. \r\nIf you are going to apply later, add it to one of your To Do Lists.\r\nIf you are applying to the job listing now, click Add to Completed List.\r\n");
-			textArea.setLineWrap(true);
-			textArea.setForeground(Color.BLACK);
-			textArea.setEditable(false);
-			textArea.setBackground(SystemColor.scrollbar);
-			GridBagConstraints gbc_textArea = new GridBagConstraints();
-			gbc_textArea.gridwidth = 5;
-			gbc_textArea.insets = new Insets(0, 0, 5, 5);
-			gbc_textArea.fill = GridBagConstraints.BOTH;
-			gbc_textArea.gridx = 0;
-			gbc_textArea.gridy = 1;
-			panel.add(textArea, gbc_textArea);
+			textAreaInstructions.setLineWrap(true);
+			textAreaInstructions.setForeground(Color.BLACK);
+			textAreaInstructions.setEditable(false);
+			textAreaInstructions.setBackground(SystemColor.scrollbar);
+			GridBagConstraints gbc_textAreaInstructions = new GridBagConstraints();
+			gbc_textAreaInstructions.anchor = GridBagConstraints.NORTH;
+			gbc_textAreaInstructions.gridwidth = 4;
+			gbc_textAreaInstructions.insets = new Insets(0, 0, 5, 5);
+			gbc_textAreaInstructions.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textAreaInstructions.gridx = 1;
+			gbc_textAreaInstructions.gridy = 4;
+			panel.add(textAreaInstructions, gbc_textAreaInstructions);
 
-			JLabel label = new JLabel("Job Title");
-			GridBagConstraints gbc_label = new GridBagConstraints();
-			gbc_label.anchor = GridBagConstraints.EAST;
-			gbc_label.insets = new Insets(0, 0, 5, 5);
-			gbc_label.gridx = 1;
-			gbc_label.gridy = 2;
-			panel.add(label, gbc_label);
+			JLabel lblJobTitle = new JLabel("Job Title");
+			GridBagConstraints gbc_lblJobTitle = new GridBagConstraints();
+			gbc_lblJobTitle.anchor = GridBagConstraints.EAST;
+			gbc_lblJobTitle.insets = new Insets(0, 0, 5, 5);
+			gbc_lblJobTitle.gridx = 1;
+			gbc_lblJobTitle.gridy = 5;
+			panel.add(lblJobTitle, gbc_lblJobTitle);
 
 			textJobTitle = new JTextField();
 			GridBagConstraints gbc_textJobTitle = new GridBagConstraints();
 			gbc_textJobTitle.insets = new Insets(0, 0, 5, 5);
 			gbc_textJobTitle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textJobTitle.gridx = 2;
-			gbc_textJobTitle.gridy = 2;
+			gbc_textJobTitle.gridy = 5;
 			panel.add(textJobTitle, gbc_textJobTitle);
 			textJobTitle.setColumns(10);
 
@@ -214,7 +232,7 @@ import java.awt.event.KeyEvent;
 			gbc_lblNotes.fill = GridBagConstraints.HORIZONTAL;
 			gbc_lblNotes.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNotes.gridx = 3;
-			gbc_lblNotes.gridy = 2;
+			gbc_lblNotes.gridy = 5;
 			panel.add(lblNotes, gbc_lblNotes);
 
 			textAreaNotes = new JTextArea();
@@ -226,16 +244,16 @@ import java.awt.event.KeyEvent;
 			gbc_textAreaNotes.insets = new Insets(0, 0, 5, 5);
 			gbc_textAreaNotes.fill = GridBagConstraints.BOTH;
 			gbc_textAreaNotes.gridx = 4;
-			gbc_textAreaNotes.gridy = 2;
+			gbc_textAreaNotes.gridy = 5;
 			panel.add(textAreaNotes, gbc_textAreaNotes);
 
-			JLabel label_1 = new JLabel("Company");
-			GridBagConstraints gbc_label_1 = new GridBagConstraints();
-			gbc_label_1.anchor = GridBagConstraints.EAST;
-			gbc_label_1.insets = new Insets(0, 0, 5, 5);
-			gbc_label_1.gridx = 1;
-			gbc_label_1.gridy = 3;
-			panel.add(label_1, gbc_label_1);
+			JLabel lblCompany = new JLabel("Company");
+			GridBagConstraints gbc_lblCompany = new GridBagConstraints();
+			gbc_lblCompany.anchor = GridBagConstraints.EAST;
+			gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
+			gbc_lblCompany.gridx = 1;
+			gbc_lblCompany.gridy = 6;
+			panel.add(lblCompany, gbc_lblCompany);
 			textJobTitle.setColumns(10);
 
 			textCompany = new JTextField();
@@ -243,34 +261,34 @@ import java.awt.event.KeyEvent;
 			gbc_textCompany.insets = new Insets(0, 0, 5, 5);
 			gbc_textCompany.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textCompany.gridx = 2;
-			gbc_textCompany.gridy = 3;
+			gbc_textCompany.gridy = 6;
 			panel.add(textCompany, gbc_textCompany);
 			textCompany.setColumns(10);
 
-			JLabel label_2 = new JLabel("Location");
-			GridBagConstraints gbc_label_2 = new GridBagConstraints();
-			gbc_label_2.anchor = GridBagConstraints.EAST;
-			gbc_label_2.insets = new Insets(0, 0, 5, 5);
-			gbc_label_2.gridx = 1;
-			gbc_label_2.gridy = 4;
-			panel.add(label_2, gbc_label_2);
+			JLabel lblLocation = new JLabel("Location");
+			GridBagConstraints gbc_lblLocation = new GridBagConstraints();
+			gbc_lblLocation.anchor = GridBagConstraints.EAST;
+			gbc_lblLocation.insets = new Insets(0, 0, 5, 5);
+			gbc_lblLocation.gridx = 1;
+			gbc_lblLocation.gridy = 7;
+			panel.add(lblLocation, gbc_lblLocation);
 
 			textLocation = new JTextField();
 			GridBagConstraints gbc_textLocation = new GridBagConstraints();
 			gbc_textLocation.insets = new Insets(0, 0, 5, 5);
 			gbc_textLocation.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textLocation.gridx = 2;
-			gbc_textLocation.gridy = 4;
+			gbc_textLocation.gridy = 7;
 			panel.add(textLocation, gbc_textLocation);
 			textLocation.setColumns(10);
 
-			JLabel label_3 = new JLabel("Found Date");
-			GridBagConstraints gbc_label_3 = new GridBagConstraints();
-			gbc_label_3.anchor = GridBagConstraints.EAST;
-			gbc_label_3.insets = new Insets(0, 0, 5, 5);
-			gbc_label_3.gridx = 1;
-			gbc_label_3.gridy = 5;
-			panel.add(label_3, gbc_label_3);
+			JLabel lblFoundDate = new JLabel("Found Date");
+			GridBagConstraints gbc_lblFoundDate = new GridBagConstraints();
+			gbc_lblFoundDate.anchor = GridBagConstraints.EAST;
+			gbc_lblFoundDate.insets = new Insets(0, 0, 5, 5);
+			gbc_lblFoundDate.gridx = 1;
+			gbc_lblFoundDate.gridy = 8;
+			panel.add(lblFoundDate, gbc_lblFoundDate);
 
 			textFoundDate = new JTextField();
 			textFoundDate.setEditable(false);
@@ -279,78 +297,85 @@ import java.awt.event.KeyEvent;
 			gbc_textFoundDate.insets = new Insets(0, 0, 5, 5);
 			gbc_textFoundDate.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFoundDate.gridx = 2;
-			gbc_textFoundDate.gridy = 5;
+			gbc_textFoundDate.gridy = 8;
 			panel.add(textFoundDate, gbc_textFoundDate);
 			textFoundDate.setColumns(10);
 			setFoundDate();// automatically defaults to today's date
 
-			JToolBar toolBar = new JToolBar();
-			GridBagConstraints gbc_toolBar = new GridBagConstraints();
-			gbc_toolBar.anchor = GridBagConstraints.WEST;
-			gbc_toolBar.insets = new Insets(0, 0, 5, 5);
-			gbc_toolBar.gridwidth = 5;
-			gbc_toolBar.gridx = 0;
-			gbc_toolBar.gridy = 6;
-			panel.add(toolBar, gbc_toolBar);
+			JToolBar toolBarAddJobButtons = new JToolBar();
+			GridBagConstraints gbc_toolBarAddJobButtons = new GridBagConstraints();
+			gbc_toolBarAddJobButtons.anchor = GridBagConstraints.WEST;
+			gbc_toolBarAddJobButtons.insets = new Insets(0, 0, 5, 5);
+			gbc_toolBarAddJobButtons.gridwidth = 4;
+			gbc_toolBarAddJobButtons.gridx = 1;
+			gbc_toolBarAddJobButtons.gridy = 9;
+			panel.add(toolBarAddJobButtons, gbc_toolBarAddJobButtons);
 
-			JSeparator separatorAddJob = new JSeparator();
-			separatorAddJob.setAlignmentY(Component.TOP_ALIGNMENT);
-			separatorAddJob.setSize(new Dimension(28, 10));
-			separatorAddJob.setOpaque(true);
-			separatorAddJob.setForeground(Color.BLACK);
-			separatorAddJob.setBackground(Color.BLACK);
-			GridBagConstraints gbc_separatorAddJob = new GridBagConstraints();
-			gbc_separatorAddJob.anchor = GridBagConstraints.NORTH;
-			gbc_separatorAddJob.fill = GridBagConstraints.HORIZONTAL;
-			gbc_separatorAddJob.ipady = 10;
-			gbc_separatorAddJob.ipadx = 10;
-			gbc_separatorAddJob.weightx = 1.0;
-			gbc_separatorAddJob.weighty = 1.0;
-			gbc_separatorAddJob.gridwidth = 5;
-			gbc_separatorAddJob.insets = new Insets(0, 0, 5, 5);
-			gbc_separatorAddJob.gridx = 0;
-			gbc_separatorAddJob.gridy = 7;
-			panel.add(separatorAddJob, gbc_separatorAddJob);
-
-			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-	
-			//this button will generate data helpful for testing- remove before release to users
-			JButton btnTest = new JButton("Test");
-			btnTest.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					textJobTitle.setText("testJobName" + testCount );
-					textCompany.setText("testCompany" + testCount);
-					textLocation.setText("Des Moines, IA");
-					testCount+=1;
-					if (testCount % 3 == 0) {
-						textAreaNotes.setText("www.hardjobapplication.com. This is a priority. Create a cover letter and customize resume.");
-					} else
-						textAreaNotes.setText("Apply online at www.easyjobapplication.com. No deadline listed.");
-					}
-				});
-			
-			GridBagConstraints gbc_btnTest = new GridBagConstraints();
-			gbc_btnTest.insets = new Insets(0, 0, 5, 5);
-			gbc_btnTest.gridx = 4;
-			gbc_btnTest.gridy = 8;
-			panel.add(btnTest, gbc_btnTest);
-			GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-			gbc_tabbedPane.gridheight = 2;
-			gbc_tabbedPane.insets = new Insets(0, 0, 5, 0);
-			gbc_tabbedPane.anchor = GridBagConstraints.NORTH;
-			gbc_tabbedPane.fill = GridBagConstraints.HORIZONTAL;
-			gbc_tabbedPane.gridx = 1;
-			gbc_tabbedPane.gridy = 9;
-			gbc_tabbedPane.gridwidth = 5;
-			panel.add(tabbedPane, gbc_tabbedPane);
+			JTabbedPane tabbedPaneManageQueues = new JTabbedPane(JTabbedPane.TOP);
+					
+							//this button will generate data helpful for testing- remove before release to users
+							JButton btnTest = new JButton("Test");
+							btnTest.setToolTipText("This button is for testing purposes only. It will generate test data in the form.");
+							btnTest.setForeground(new Color(0, 0, 0));
+							btnTest.setBackground(new Color(255, 255, 255));
+							btnTest.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent arg0) {
+									textJobTitle.setText("testJobName" + testCount );
+									textCompany.setText("testCompany" + testCount);
+									textLocation.setText("Des Moines, IA");
+									testCount+=1;
+									if (testCount % 3 == 0) {
+										textAreaNotes.setText("www.hardjobapplication.com. This is a priority. Create a cover letter and customize resume.");
+									} else
+										textAreaNotes.setText("Apply online at www.easyjobapplication.com. No deadline listed.");
+									}
+								});
+							
+							GridBagConstraints gbc_btnTest = new GridBagConstraints();
+							gbc_btnTest.insets = new Insets(0, 0, 5, 5);
+							gbc_btnTest.gridx = 1;
+							gbc_btnTest.gridy = 10;
+							panel.add(btnTest, gbc_btnTest);
+							panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, textAreaNotes, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
+							setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
+					
+					JFormattedTextField frmtdtxtfldManageToDo = new JFormattedTextField();
+					frmtdtxtfldManageToDo.setHorizontalAlignment(SwingConstants.CENTER);
+					frmtdtxtfldManageToDo.setFont(new Font("Tahoma", Font.BOLD, 15));
+					frmtdtxtfldManageToDo.setBackground(Color.WHITE);
+					frmtdtxtfldManageToDo.setColumns(5);
+					frmtdtxtfldManageToDo.setEditable(false);
+					frmtdtxtfldManageToDo.setText("Manage To Do Lists");
+					GridBagConstraints gbc_frmtdtxtfldManageToDo = new GridBagConstraints();
+					gbc_frmtdtxtfldManageToDo.anchor = GridBagConstraints.SOUTH;
+					gbc_frmtdtxtfldManageToDo.fill = GridBagConstraints.HORIZONTAL;
+					gbc_frmtdtxtfldManageToDo.gridwidth = 4;
+					gbc_frmtdtxtfldManageToDo.insets = new Insets(0, 0, 5, 5);
+					gbc_frmtdtxtfldManageToDo.gridx = 1;
+					gbc_frmtdtxtfldManageToDo.gridy = 11;
+					panel.add(frmtdtxtfldManageToDo, gbc_frmtdtxtfldManageToDo);
+			GridBagConstraints gbc_tabbedPaneManageQueues = new GridBagConstraints();
+			gbc_tabbedPaneManageQueues.gridheight = 2;
+			gbc_tabbedPaneManageQueues.insets = new Insets(0, 0, 5, 5);
+			gbc_tabbedPaneManageQueues.anchor = GridBagConstraints.NORTH;
+			gbc_tabbedPaneManageQueues.fill = GridBagConstraints.HORIZONTAL;
+			gbc_tabbedPaneManageQueues.gridx = 1;
+			gbc_tabbedPaneManageQueues.gridy = 12;
+			gbc_tabbedPaneManageQueues.gridwidth = 4;
+			panel.add(tabbedPaneManageQueues, gbc_tabbedPaneManageQueues);
 
 			btnAddGen = new MoveToQueueButton("Add to ", new Color(0, 128, 0), null, genQueue); // add to
+			btnAddGen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
 			btnAddGen.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent arg0) {
 					addSubmit(btnAddGen);
 				}
 			});
+
 																							// genQueue
 			btnAddGen.addMouseListener(new MouseAdapter() {
 				@Override
@@ -359,7 +384,8 @@ import java.awt.event.KeyEvent;
 				}
 			});
 			btnAddGen.setFont(fontButton);
-			toolBar.add(btnAddGen);
+			btnAddGen.setToolTipText("Add this job to the general to do list and clear the form.");
+			toolBarAddJobButtons.add(btnAddGen);
 
 			btnAddPri = new MoveToQueueButton("Add to ", Color.GREEN, null, priQueue);
 			btnAddPri.addMouseListener(new MouseAdapter() {
@@ -375,9 +401,10 @@ import java.awt.event.KeyEvent;
 				}
 			});
 			btnAddPri.setFont(fontButton);
-			toolBar.add(btnAddPri);
+			btnAddPri.setToolTipText("Add this job to the priority to do list and clear the form.");
+			toolBarAddJobButtons.add(btnAddPri);
 
-			JButton btnClearJobForm = new JButton("    Clear Form    ");
+			btnClearJobForm = new JButton("    Clear Form    ");
 			btnClearJobForm.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
@@ -392,7 +419,8 @@ import java.awt.event.KeyEvent;
 			});
 			btnClearJobForm.setFont(fontButton);
 			btnClearJobForm.setBackground(Color.LIGHT_GRAY);
-			toolBar.add(btnClearJobForm);
+			btnClearJobForm.setToolTipText("Clear the form without saving.");
+			toolBarAddJobButtons.add(btnClearJobForm);
 
 			btnCompleted = new MoveToQueueButton("Mark ", new Color(0, 128, 0), null,complQueue);
 			btnCompleted.setFont(fontButton);
@@ -408,17 +436,15 @@ import java.awt.event.KeyEvent;
 					addSubmit(btnCompleted);
 				}
 			});
-			
-			toolBar.add(btnCompleted);
+			btnCompleted.setToolTipText("Mark this job listing completed and clear the form.");
+			toolBarAddJobButtons.add(btnCompleted);
 
 			panelManageGen = new GUIManageQueue(genQueue, priQueue, complQueue);
-			tabbedPane.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
+			tabbedPaneManageQueues.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
 
 			panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
-			tabbedPane.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
-			panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, textAreaNotes, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
-			setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
-			tabbedPane.addChangeListener(new ChangeListener() {
+			tabbedPaneManageQueues.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
+			tabbedPaneManageQueues.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
 					updateScreen();
 				}

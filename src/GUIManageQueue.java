@@ -143,6 +143,7 @@ private void setTextStatus() {
 				GUIJobTrackerMain.updateButtons();
 			}
 		});
+		btnDeleteListing.setToolTipText("Permanently delete job listing.");
 		toolBar.add(btnDeleteListing);
 		
 		//create button to move items to another queue
@@ -155,6 +156,7 @@ private void setTextStatus() {
 				GUIJobTrackerMain.updateButtons();
 			}
 		});
+		btnMove1.setToolTipText("Add job to new list, delete from current list.");
 		toolBar.add(btnMove1);
 
 		//create button to move items to another queue
@@ -167,6 +169,7 @@ private void setTextStatus() {
 				GUIJobTrackerMain.updateButtons();
 			}
 		});
+		btnMove2.setToolTipText("Add job to new list, delete from current list.");
 		toolBar.add(btnMove2);
 	
 		textStatus = new JTextField();
