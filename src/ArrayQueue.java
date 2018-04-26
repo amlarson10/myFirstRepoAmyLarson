@@ -18,6 +18,7 @@ public class ArrayQueue extends Queue {
 	 */
 	public ArrayQueue(String queueName, int maxSize) {
 		super(queueName, maxSize);
+		if (maxSize <1) {setMaxSize(1);} //force to default size of 1 if invalid size entered 
 		qArray = new JobListing[getMaxSize()];
 		front = 0;
 		rear = -1;

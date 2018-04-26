@@ -7,11 +7,11 @@ public class ListQueue extends Queue {
 	private LinkedListForQueue myList;
 
 	/**
-	 * Constructor for ListQueue. max size is automatically set to 0, indicating no limit.
+	 * Constructor for ListQueue. max size is automatically set to -1, indicating no limit.
 	 * @param queueName
 	 */
 	public ListQueue(String queueName) {
-		super(queueName, 0);
+		super(queueName, -1);
 		myList = new LinkedListForQueue();
 	}
 

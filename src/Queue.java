@@ -11,7 +11,7 @@ public abstract class Queue {
 	/**
 	 * Constructor for a queue. Requires a friendly name and a max size (may be null for unlimited)
 	 * @param queueName The name that will appear in instructions and on buttons. No spaces before or after. May include "The " at the start
-	 * @param maxSize Maximum size greater than 0 is required for arrays. Set to 0 for non-arrays with unlimited size.
+	 * @param maxSize Maximum size greater than 0 is required for arrays. Set to -1 for non-arrays with unlimited size.
 	 */
 	public Queue(String queueName, int maxSize) {
 		this.name = queueName;
