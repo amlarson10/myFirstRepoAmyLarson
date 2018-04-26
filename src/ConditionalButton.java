@@ -1,12 +1,14 @@
+/**
+ * @author Amy Larson amlarson10@dmacc.edu 3/19/2018 updated 4/2/18 CIS152
+ * This class creates a JButton that can be disabled or enabled based on conditions.
+ */
 import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
-/**
- * @author Amy Larson amlarson10@dmacc.edu 3/19/2018 updated 4/2/18 CIS152
- * This class creates a JButton that can be disabled or enabled based on conditions.
- */
+/** This class creates a JButton that can be disabled or enabled based on conditions.
+*/
 public class ConditionalButton extends JButton {
 
 	private static final long serialVersionUID = 8864534052108560092L; //compiler flagged need for this

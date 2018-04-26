@@ -1,3 +1,7 @@
+/**
+ *  @author Amy Larson amlarson10@dmacc.edu 3/19/2018
+ *  This class is for a panel that contains the displays and buttons for the user to view the contents of a queue and manage the queue.
+ */
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

@@ -1,5 +1,6 @@
-
-
+/** @author Amy Larson amlarson10@dmacc.edu 3/19/2018
+ * This is the main screen of the application. It contains a section for adding a joblisting and a section for managing queues.
+*/
 	import java.awt.BorderLayout;
 	import java.awt.EventQueue;
 	import javax.swing.JFrame;
