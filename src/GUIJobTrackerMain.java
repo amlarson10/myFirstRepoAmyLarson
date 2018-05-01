@@ -169,15 +169,15 @@ import javax.swing.SwingConstants;
 			contentPane.setLayout(new BorderLayout(0, 0));
 			setContentPane(contentPane);
 
-			JPanel panel = new JPanel();
-			contentPane.add(panel, BorderLayout.WEST);
-			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[] { 0, 75, 259, 0, 301, 0 };
-			gbl_panel.rowHeights = new int[] { 3, 0, -11, 73, 75, 20, 20, 20, 20, 33, 0, 0, 0, 0, 63, 0 };
-			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, 0.0 };
-			gbl_panel.rowWeights = new double[] { 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
+			JPanel mainPanel = new JPanel();
+			contentPane.add(mainPanel, BorderLayout.WEST);
+			GridBagLayout gbl_mainPanel = new GridBagLayout();
+			gbl_mainPanel.columnWidths = new int[] { 0, 75, 259, 0, 301, 0 };
+			gbl_mainPanel.rowHeights = new int[] { 3, 0, -11, 73, 75, 20, 20, 20, 20, 33, 0, 0, 0, 0, 63, 0 };
+			gbl_mainPanel.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, 0.0 };
+			gbl_mainPanel.rowWeights = new double[] { 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
 					Double.MIN_VALUE };
-			panel.setLayout(gbl_panel);
+			mainPanel.setLayout(gbl_mainPanel);
 			
 			JFormattedTextField frmtdtxtfldAddAJob = new JFormattedTextField();
 			frmtdtxtfldAddAJob.setText("Add a Job Listing");
@@ -193,7 +193,7 @@ import javax.swing.SwingConstants;
 			gbc_frmtdtxtfldAddAJob.fill = GridBagConstraints.HORIZONTAL;
 			gbc_frmtdtxtfldAddAJob.gridx = 1;
 			gbc_frmtdtxtfldAddAJob.gridy = 3;
-			panel.add(frmtdtxtfldAddAJob, gbc_frmtdtxtfldAddAJob);
+			mainPanel.add(frmtdtxtfldAddAJob, gbc_frmtdtxtfldAddAJob);
 
 			JTextArea textAreaInstructions = new JTextArea();
 			textAreaInstructions.setRows(3);
@@ -211,7 +211,7 @@ import javax.swing.SwingConstants;
 			gbc_textAreaInstructions.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textAreaInstructions.gridx = 1;
 			gbc_textAreaInstructions.gridy = 4;
-			panel.add(textAreaInstructions, gbc_textAreaInstructions);
+			mainPanel.add(textAreaInstructions, gbc_textAreaInstructions);
 
 			JLabel lblJobTitle = new JLabel("Job Title");
 			GridBagConstraints gbc_lblJobTitle = new GridBagConstraints();
@@ -219,7 +219,7 @@ import javax.swing.SwingConstants;
 			gbc_lblJobTitle.insets = new Insets(0, 0, 5, 5);
 			gbc_lblJobTitle.gridx = 1;
 			gbc_lblJobTitle.gridy = 5;
-			panel.add(lblJobTitle, gbc_lblJobTitle);
+			mainPanel.add(lblJobTitle, gbc_lblJobTitle);
 
 			textJobTitle = new JTextField();
 			GridBagConstraints gbc_textJobTitle = new GridBagConstraints();
@@ -227,7 +227,7 @@ import javax.swing.SwingConstants;
 			gbc_textJobTitle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textJobTitle.gridx = 2;
 			gbc_textJobTitle.gridy = 5;
-			panel.add(textJobTitle, gbc_textJobTitle);
+			mainPanel.add(textJobTitle, gbc_textJobTitle);
 			textJobTitle.setColumns(10);
 
 			JLabel lblNotes = new JLabel("Notes");
@@ -236,7 +236,7 @@ import javax.swing.SwingConstants;
 			gbc_lblNotes.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNotes.gridx = 3;
 			gbc_lblNotes.gridy = 5;
-			panel.add(lblNotes, gbc_lblNotes);
+			mainPanel.add(lblNotes, gbc_lblNotes);
 
 			textAreaNotes = new JTextArea();
 			textAreaNotes.setLineWrap(true);
@@ -248,7 +248,7 @@ import javax.swing.SwingConstants;
 			gbc_textAreaNotes.fill = GridBagConstraints.BOTH;
 			gbc_textAreaNotes.gridx = 4;
 			gbc_textAreaNotes.gridy = 5;
-			panel.add(textAreaNotes, gbc_textAreaNotes);
+			mainPanel.add(textAreaNotes, gbc_textAreaNotes);
 
 			JLabel lblCompany = new JLabel("Company");
 			GridBagConstraints gbc_lblCompany = new GridBagConstraints();
@@ -256,7 +256,7 @@ import javax.swing.SwingConstants;
 			gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
 			gbc_lblCompany.gridx = 1;
 			gbc_lblCompany.gridy = 6;
-			panel.add(lblCompany, gbc_lblCompany);
+			mainPanel.add(lblCompany, gbc_lblCompany);
 			textJobTitle.setColumns(10);
 
 			textCompany = new JTextField();
@@ -265,7 +265,7 @@ import javax.swing.SwingConstants;
 			gbc_textCompany.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textCompany.gridx = 2;
 			gbc_textCompany.gridy = 6;
-			panel.add(textCompany, gbc_textCompany);
+			mainPanel.add(textCompany, gbc_textCompany);
 			textCompany.setColumns(10);
 
 			JLabel lblLocation = new JLabel("Location");
@@ -274,7 +274,7 @@ import javax.swing.SwingConstants;
 			gbc_lblLocation.insets = new Insets(0, 0, 5, 5);
 			gbc_lblLocation.gridx = 1;
 			gbc_lblLocation.gridy = 7;
-			panel.add(lblLocation, gbc_lblLocation);
+			mainPanel.add(lblLocation, gbc_lblLocation);
 
 			textLocation = new JTextField();
 			GridBagConstraints gbc_textLocation = new GridBagConstraints();
@@ -282,7 +282,7 @@ import javax.swing.SwingConstants;
 			gbc_textLocation.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textLocation.gridx = 2;
 			gbc_textLocation.gridy = 7;
-			panel.add(textLocation, gbc_textLocation);
+			mainPanel.add(textLocation, gbc_textLocation);
 			textLocation.setColumns(10);
 
 			JLabel lblFoundDate = new JLabel("Found Date");
@@ -291,7 +291,7 @@ import javax.swing.SwingConstants;
 			gbc_lblFoundDate.insets = new Insets(0, 0, 5, 5);
 			gbc_lblFoundDate.gridx = 1;
 			gbc_lblFoundDate.gridy = 8;
-			panel.add(lblFoundDate, gbc_lblFoundDate);
+			mainPanel.add(lblFoundDate, gbc_lblFoundDate);
 
 			textFoundDate = new JTextField();
 			textFoundDate.setEditable(false);
@@ -301,7 +301,7 @@ import javax.swing.SwingConstants;
 			gbc_textFoundDate.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFoundDate.gridx = 2;
 			gbc_textFoundDate.gridy = 8;
-			panel.add(textFoundDate, gbc_textFoundDate);
+			mainPanel.add(textFoundDate, gbc_textFoundDate);
 			textFoundDate.setColumns(10);
 			setFoundDate();// automatically defaults to today's date
 
@@ -312,7 +312,7 @@ import javax.swing.SwingConstants;
 			gbc_toolBarAddJobButtons.gridwidth = 4;
 			gbc_toolBarAddJobButtons.gridx = 1;
 			gbc_toolBarAddJobButtons.gridy = 9;
-			panel.add(toolBarAddJobButtons, gbc_toolBarAddJobButtons);
+			mainPanel.add(toolBarAddJobButtons, gbc_toolBarAddJobButtons);
 
 			JTabbedPane tabbedPaneManageQueues = new JTabbedPane(JTabbedPane.TOP);
 					
@@ -339,23 +339,24 @@ import javax.swing.SwingConstants;
 							gbc_btnTest.insets = new Insets(0, 0, 5, 5);
 							gbc_btnTest.gridx = 1;
 							gbc_btnTest.gridy = 10;
-							panel.add(btnTest, gbc_btnTest);
+							mainPanel.add(btnTest, gbc_btnTest);
 					
-					JFormattedTextField frmtdtxtfldManageToDo = new JFormattedTextField();
-					frmtdtxtfldManageToDo.setHorizontalAlignment(SwingConstants.CENTER);
-					frmtdtxtfldManageToDo.setFont(new Font("Tahoma", Font.BOLD, 15));
-					frmtdtxtfldManageToDo.setBackground(Color.WHITE);
-					frmtdtxtfldManageToDo.setColumns(5);
-					frmtdtxtfldManageToDo.setEditable(false);
-					frmtdtxtfldManageToDo.setText("Manage To Do Lists");
-					GridBagConstraints gbc_frmtdtxtfldManageToDo = new GridBagConstraints();
-					gbc_frmtdtxtfldManageToDo.anchor = GridBagConstraints.SOUTH;
-					gbc_frmtdtxtfldManageToDo.fill = GridBagConstraints.HORIZONTAL;
-					gbc_frmtdtxtfldManageToDo.gridwidth = 4;
-					gbc_frmtdtxtfldManageToDo.insets = new Insets(0, 0, 5, 5);
-					gbc_frmtdtxtfldManageToDo.gridx = 1;
-					gbc_frmtdtxtfldManageToDo.gridy = 11;
-					panel.add(frmtdtxtfldManageToDo, gbc_frmtdtxtfldManageToDo);
+			JFormattedTextField frmtdtxtfldManageToDo = new JFormattedTextField();
+			frmtdtxtfldManageToDo.setHorizontalAlignment(SwingConstants.CENTER);
+			frmtdtxtfldManageToDo.setFont(new Font("Tahoma", Font.BOLD, 15));
+			frmtdtxtfldManageToDo.setBackground(Color.WHITE);
+			frmtdtxtfldManageToDo.setColumns(5);
+			frmtdtxtfldManageToDo.setEditable(false);
+			frmtdtxtfldManageToDo.setText("Manage To Do Lists");
+			GridBagConstraints gbc_frmtdtxtfldManageToDo = new GridBagConstraints();
+			gbc_frmtdtxtfldManageToDo.anchor = GridBagConstraints.SOUTH;
+			gbc_frmtdtxtfldManageToDo.fill = GridBagConstraints.HORIZONTAL;
+			gbc_frmtdtxtfldManageToDo.gridwidth = 4;
+			gbc_frmtdtxtfldManageToDo.insets = new Insets(0, 0, 5, 5);
+			gbc_frmtdtxtfldManageToDo.gridx = 1;
+			gbc_frmtdtxtfldManageToDo.gridy = 11;
+			mainPanel.add(frmtdtxtfldManageToDo, gbc_frmtdtxtfldManageToDo);
+			
 			GridBagConstraints gbc_tabbedPaneManageQueues = new GridBagConstraints();
 			gbc_tabbedPaneManageQueues.gridheight = 2;
 			gbc_tabbedPaneManageQueues.insets = new Insets(0, 0, 5, 5);
@@ -364,7 +365,7 @@ import javax.swing.SwingConstants;
 			gbc_tabbedPaneManageQueues.gridx = 1;
 			gbc_tabbedPaneManageQueues.gridy = 12;
 			gbc_tabbedPaneManageQueues.gridwidth = 4;
-			panel.add(tabbedPaneManageQueues, gbc_tabbedPaneManageQueues);
+			mainPanel.add(tabbedPaneManageQueues, gbc_tabbedPaneManageQueues);
 
 			btnAddGen = new MoveToQueueButton("Add to ", new Color(0, 128, 0), null, genQueue); // add to
 			btnAddGen.addActionListener(new ActionListener() {
@@ -446,8 +447,8 @@ import javax.swing.SwingConstants;
 
 			panelManageGen = new GUIManageQueue(genQueue, priQueue, complQueue);
 			tabbedPaneManageQueues.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
-			panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
-			setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
+			setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
+			//mainPanel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
 			tabbedPaneManageQueues.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
 					updateScreen();
