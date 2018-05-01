@@ -54,10 +54,12 @@ import javax.swing.SwingConstants;
 
 		//this variable is to assist with generating test data
 		private int testCount = 0;
+		
+		private final boolean TEST_MODE = false;
 
 		private static ListQueue genQueue = new ListQueue("General To Do");
 		private static ListQueue complQueue = new ListQueue("Completed");
-		private final static int MAX_SIZE = 5;// this is declares max size for the priority queue.
+		private final static int MAX_SIZE = 3;// this is declares max size for the priority queue.
 		private static ArrayQueue priQueue = new ArrayQueue("Urgent To Do", MAX_SIZE);
 		private static MoveToQueueButton btnCompleted;
 		private static MoveToQueueButton btnAddPri;
@@ -171,7 +173,7 @@ import javax.swing.SwingConstants;
 			contentPane.add(panel, BorderLayout.WEST);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[] { 0, 75, 259, 0, 301, 0 };
-			gbl_panel.rowHeights = new int[] { 3, 0, -11, 80, 75, 20, 20, 20, 20, 33, 0, 0, 0, 0, 63, 0 };
+			gbl_panel.rowHeights = new int[] { 3, 0, -11, 73, 75, 20, 20, 20, 20, 33, 0, 0, 0, 0, 63, 0 };
 			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, 0.0 };
 			gbl_panel.rowWeights = new double[] { 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
 					Double.MIN_VALUE };
@@ -314,8 +316,9 @@ import javax.swing.SwingConstants;
 
 			JTabbedPane tabbedPaneManageQueues = new JTabbedPane(JTabbedPane.TOP);
 					
-							//this button will generate data helpful for testing- remove before release to users
+							//this button will generate data helpful for testing- turn test mode off before release to users
 							JButton btnTest = new JButton("Test");
+							btnTest.setVisible(TEST_MODE);
 							btnTest.setToolTipText("This button is for testing purposes only. It will generate test data in the form.");
 							btnTest.setForeground(new Color(0, 0, 0));
 							btnTest.setBackground(new Color(255, 255, 255));
@@ -337,8 +340,6 @@ import javax.swing.SwingConstants;
 							gbc_btnTest.gridx = 1;
 							gbc_btnTest.gridy = 10;
 							panel.add(btnTest, gbc_btnTest);
-							panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, textAreaNotes, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
-							setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddGen, btnAddPri, btnClearJobForm, btnCompleted, btnTest, panelManageGen, panelManagePri}));
 					
 					JFormattedTextField frmtdtxtfldManageToDo = new JFormattedTextField();
 					frmtdtxtfldManageToDo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -440,11 +441,13 @@ import javax.swing.SwingConstants;
 			btnCompleted.setToolTipText("Mark this job listing completed and clear the form.");
 			toolBarAddJobButtons.add(btnCompleted);
 			
-						panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
-						tabbedPaneManageQueues.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
+			panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
+			tabbedPaneManageQueues.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
 
 			panelManageGen = new GUIManageQueue(genQueue, priQueue, complQueue);
 			tabbedPaneManageQueues.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
+			panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
+			setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textJobTitle, textCompany, textLocation, textFoundDate, btnAddPri, btnAddGen, btnClearJobForm, btnCompleted}));
 			tabbedPaneManageQueues.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
 					updateScreen();
