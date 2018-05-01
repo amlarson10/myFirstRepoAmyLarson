@@ -384,26 +384,26 @@ import javax.swing.SwingConstants;
 					addSubmit(btnAddGen);
 				}
 			});
+			
+						btnAddPri = new MoveToQueueButton("Add to ", Color.GREEN, null, priQueue);
+						btnAddPri.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								addSubmit(btnAddPri);
+							}
+						});
+						btnAddPri.addKeyListener(new KeyAdapter() {
+							@Override
+							public void keyTyped(KeyEvent arg0) {
+								addSubmit(btnAddPri);
+							}
+						});
+						btnAddPri.setFont(fontButton);
+						btnAddPri.setToolTipText("Add this job to the priority to do list and clear the form.");
+						toolBarAddJobButtons.add(btnAddPri);
 			btnAddGen.setFont(fontButton);
 			btnAddGen.setToolTipText("Add this job to the general to do list and clear the form.");
 			toolBarAddJobButtons.add(btnAddGen);
-
-			btnAddPri = new MoveToQueueButton("Add to ", Color.GREEN, null, priQueue);
-			btnAddPri.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					addSubmit(btnAddPri);
-				}
-			});
-			btnAddPri.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-					addSubmit(btnAddPri);
-				}
-			});
-			btnAddPri.setFont(fontButton);
-			btnAddPri.setToolTipText("Add this job to the priority to do list and clear the form.");
-			toolBarAddJobButtons.add(btnAddPri);
 
 			btnClearJobForm = new JButton("    Clear Form    ");
 			btnClearJobForm.addMouseListener(new MouseAdapter() {
@@ -439,12 +439,12 @@ import javax.swing.SwingConstants;
 			});
 			btnCompleted.setToolTipText("Mark this job listing completed and clear the form.");
 			toolBarAddJobButtons.add(btnCompleted);
+			
+						panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
+						tabbedPaneManageQueues.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
 
 			panelManageGen = new GUIManageQueue(genQueue, priQueue, complQueue);
 			tabbedPaneManageQueues.addTab("Manage "+genQueue.getName(), null, panelManageGen, null);
-
-			panelManagePri = new GUIManageQueue(priQueue, genQueue, complQueue);
-			tabbedPaneManageQueues.addTab("Manage "+priQueue.getName(), null, panelManagePri, null);
 			tabbedPaneManageQueues.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
 					updateScreen();
